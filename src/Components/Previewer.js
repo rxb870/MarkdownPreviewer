@@ -1,9 +1,15 @@
 import React from 'react'
 
-function Previewer() {
-
+export default function Previewer(props) {
+    return (
+        <div>
+        <button onClick={props.previewerToggle}>P</button>
+          <h1>This is the previewer component</h1>
+      
+        </div>
+    )
 }
 
-export default Previewer;
+
 
 //need button or icon that when clicked changes state for previewerClick : true  from false

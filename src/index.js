@@ -4,11 +4,11 @@ import 'materialize-css/dist/css/materialize.min.css'
 import App from './Components/App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk'
-import reducer from '../src/reducers/reducer'
+import { createStore } from 'redux';
 
-const store = createStore(reducer, applyMiddleware(thunk));
+import rootReducer from './reducers/rootReducer'
+
+const store = createStore(rootReducer);
 
 ReactDOM.render(
   <React.StrictMode>

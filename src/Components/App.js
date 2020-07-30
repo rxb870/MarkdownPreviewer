@@ -2,33 +2,70 @@
 import ReactFCCtest from 'react-fcctest';
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { editorToggle } from '../actions/editorToggleA';
+import { previewerToggle } from '../actions/previewerToggleA'
+import Editor from './Editor';
+import Previewer from './Previewer';
 
-// if editorClick && previewerClick false render list.
-// else if editorClick true render editor Component
-// else if previewerClick true render Previewer Component
+
 
 //put markdown string in state? Make editor a controlledInput?
 
-export class App extends Component {
+class App extends Component {
 
 
   render() {
+    let renderedComponent;
+    if (!this.props.editor_toggle && !this.props.previewer_toggle) {
+      renderedComponent = (
+        <div>
+          <Editor editorToggle={this.props.editorToggle} />
+          <Previewer previewerToggle={this.props.previewerToggle} />
+        </div>
+      )
+    } else if (this.props.editor_toggle && !this.props.previewer_toggle) {
+      renderedComponent = (
+        <div>
+          <Editor editorToggle={this.props.editorToggle} />
+        </div>
+      )
+    }
+    else {
+      renderedComponent = (
+        <div>
+          <Previewer previewerToggle={this.props.previewerToggle} />
+        </div>
+      )
+    }
     return (
       <div className="App">
+        <button onClick={this.props.editorToggle}>click me</button>
 
-        <h1>Hello</h1>
+
         {/* <ReactFCCtest /> */}
+        {renderedComponent}
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) => ({
+// Redux
 
-})
+const mapStateToProps = (state) => {
+  return {
+    editor_toggle: state.ed_toggle_reducer.editor_toggle,
+    previewer_toggle: state.ed_toggle_reducer.previewer_toggle,
+    state: state
+  }
+}
 
-const mapDispatchToProps = {
 
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    editorToggle: () => { dispatch(editorToggle()) },
+    previewerToggle: () => { dispatch(previewerToggle()) }
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
