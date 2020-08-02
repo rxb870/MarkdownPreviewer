@@ -5,6 +5,7 @@ import App from './Components/App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
 import { createStore } from 'redux';
+import ReactFCCtest from 'react-fcctest';
 
 import rootReducer from './reducers/rootReducer'
 
@@ -14,6 +15,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <App />
+      
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
